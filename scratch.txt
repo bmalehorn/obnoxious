@@ -1,0 +1,34 @@
+window.scrollTo() =>
+
+  bubbles: true
+  cancelBubble: false
+  cancelable: false
+  composed: false
+  currentTarget: null
+  defaultPrevented: false
+  eventPhase: 0
+  isTrusted: true
+  path: (2) [document, Window]
+  returnValue: true
+  srcElement: document
+  target: document
+  timeStamp: 243.0750000057742
+  type: "scroll"
+  __proto__: Event
+
+an actual scroll:
+  bubbles: true
+  cancelBubble: false
+  cancelable: false
+  composed: false
+  currentTarget: null
+  defaultPrevented: false
+  eventPhase: 0
+  isTrusted: true
+  path: (2) [document, Window]
+  returnValue: true
+  srcElement: document
+  target: document
+  timeStamp: 46178.36000000534
+  type: "scroll"
+  __proto__: Event

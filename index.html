@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <!-- https://www.w3schools.com/jsref/met_win_scrollby.asp -->
+  <head>
+    <style>
+      body {
+        --dborder: solid lightgreen;
+        --dbg: yellow;
+        overflow: hidden;
+        font-family: monospace;
+        font-size: 24px;
+      }
+
+      pre {
+        background-color: lightgray;
+      }
+      /* <body class="production"> */
+      body.production {
+        --dborder: none;
+        --dbg: none;
+      }
+      .tall {
+        border: var(--dborder);
+        background-color: var(--dbg);
+        height: 4000px;
+      }
+      .milestones {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+    </style>
+    <script type="text/javascript">
+      window.addEventListener("load", () => {
+        setTimeout(() => {
+          const startingPoint = document.querySelector(".starting-point");
+          startingPoint.scrollIntoView({ block: "center" });
+        }, 0);
+
+        window.addEventListener("mousewheel", e => {
+          // go the *other* direction
+          window.scrollBy(0, -e.deltaY);
+        });
+      });
+
+      function mlog() {
+        const dbgOut = document.querySelector("#dbg-out");
+        dbgOut.innerHTML += JSON.stringify(arguments) + "\n";
+      }
+    </script>
+  </head>
+  <body>
+    <div class="step-2"></div>
+    <div class="tall milestones">
+      <p>You did it! Onto <a href="#">Step 2</a></p>
+      <div>
+        <p>
+          0. If there's one thing I know, it's that the user is always wrong.
+          When you scroll down, you probably wanted to go up:
+        </p>
+        <pre>
+<code>window.addEventListener("mousewheel", e => {
+  // go the *other* direction
+  window.scrollBy(0, -e.deltaY);
+});</code></pre>
+      </div>
+      <div>
+        <p>
+          0. Even though you can't scroll, you can still *try* to scroll.
+        </p>
+        <p>And I can watch you struggle:</p>
+        <pre>
+<code>window.addEventListener("mousewheel", e => { 
+  /* nice try! */ 
+});</code></pre>
+      </div>
+
+      <div>
+        <p>
+          0. Of course, I don't want you scrolling for yourself. Let's keep you
+          from scrolling at all.
+        </p>
+        <pre>
+<code>body { 
+  overflow: hidden;
+}</code></pre>
+      </div>
+
+      <div>
+        <p>
+          0. Did you know? I can force the window to scroll wherever I want:
+        </p>
+        <pre>
+<code>// You're scrolling up 100px,
+// whether you want to or not.
+window.scrollBy(0, -100);</code></pre>
+      </div>
+      <p class="starting-point">1. Scroll down to continue</p>
+    </div>
+    <div class="tall"><pre id="dbg-out"></pre></div>
+  </body>
+</html>
