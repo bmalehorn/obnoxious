@@ -9,6 +9,7 @@
         overflow: hidden;
         font-family: monospace;
         font-size: 24px;
+        padding: 10px;
       }
 
       pre {
@@ -22,12 +23,24 @@
       .tall {
         border: var(--dborder);
         background-color: var(--dbg);
-        height: 4000px;
+        height: 2000px;
+      }
+      .wrong-way {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+      }
+      .tip-top {
+        margin-bottom: 1000px;
+      }
+      .med-top {
+        margin-bottom: 300px;
       }
       .milestones {
         display: flex;
         flex-direction: column;
         justify-content: space-between;
+        height: 6000px;
       }
     </style>
     <script type="text/javascript">
@@ -36,67 +49,92 @@
           const startingPoint = document.querySelector(".starting-point");
           startingPoint.scrollIntoView({ block: "center" });
         }, 0);
-
-        window.addEventListener("mousewheel", e => {
-          // go the *other* direction
-          window.scrollBy(0, -e.deltaY);
-        });
       });
 
-      function mlog() {
-        const dbgOut = document.querySelector("#dbg-out");
-        dbgOut.innerHTML += JSON.stringify(arguments) + "\n";
-      }
+      window.addEventListener("mousewheel", e => {
+        // go the *other* direction
+        window.scrollBy(0, -e.deltaY);
+      });
+
+      window.lastClientY = null;
+
+      window.addEventListener("touchstart", e => {
+        const { clientY } = e.touches[0];
+        window.lastClientY = clientY;
+      });
+
+      window.addEventListener("touchmove", e => {
+        const { clientY } = e.touches[0];
+        window.scrollBy(0, clientY - window.lastClientY);
+        window.lastClientY = clientY;
+      });
     </script>
   </head>
-  <body>
-    <div class="step-2"></div>
+  <body class="production">
+    <div class="tall wrong-way">
+      <p class="tip-top">Wrong way!</p>
+    </div>
+
     <div class="tall milestones">
-      <p>You did it! Onto <a href="#">Step 2</a></p>
       <div>
-        <p>
-          0. If there's one thing I know, it's that the user is always wrong.
-          When you scroll down, you probably wanted to go up:
+        <p class="starting-point">
+          Have you ever been annoyed when you visited a website that broke
+          scrolling?
         </p>
-        <pre>
-<code>window.addEventListener("mousewheel", e => {
-  // go the *other* direction
-  window.scrollBy(0, -e.deltaY);
-});</code></pre>
-      </div>
-      <div>
         <p>
-          0. Even though you can't scroll, you can still *try* to scroll.
+          Imagine the damage if they were actually <em>trying</em> to be
+          annoying!
         </p>
-        <p>And I can watch you struggle:</p>
-        <pre>
-<code>window.addEventListener("mousewheel", e => { 
-  /* nice try! */ 
-});</code></pre>
+        <p>
+          Scroll down to continue
+        </p>
       </div>
 
       <div>
         <p>
-          0. Of course, I don't want you scrolling for yourself. Let's keep you
+          Did you know? I can force the window to scroll wherever I want:
+        </p>
+        <pre>
+  <code>// You're scrolling up 100px,
+  // whether you want to or not.
+  window.scrollBy(0, -100);</code></pre>
+      </div>
+
+      <div>
+        <p>
+          Of course, I don't want you scrolling for yourself. Let's keep you
           from scrolling at all.
         </p>
         <pre>
-<code>body { 
-  overflow: hidden;
-}</code></pre>
+  <code>body {
+    overflow: hidden;
+  }</code></pre>
       </div>
 
       <div>
         <p>
-          0. Did you know? I can force the window to scroll wherever I want:
+          Even though you can't scroll, you can still *try* to scroll.
+        </p>
+        <p>And I can watch you struggle:</p>
+        <pre>
+  <code>window.addEventListener("mousewheel", e => {
+    /* nice try! */
+  });</code></pre>
+      </div>
+
+      <div>
+        <p>
+          If there's one thing I know, it's that the user is always wrong. When
+          you scroll down, you probably wanted to go up:
         </p>
         <pre>
-<code>// You're scrolling up 100px,
-// whether you want to or not.
-window.scrollBy(0, -100);</code></pre>
+  <code>window.addEventListener("mousewheel", e => {
+    // go the *other* direction
+    window.scrollBy(0, -e.deltaY);
+  });</code></pre>
       </div>
-      <p class="starting-point">1. Scroll down to continue</p>
+
+      <p class="med-top">You made it! Onto <a href="#">Step 2</a></p>
     </div>
-    <div class="tall"><pre id="dbg-out"></pre></div>
   </body>
 </html>
